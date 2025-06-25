@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Users, BookOpen, Globe, Quote, Star, Target, Heart, Compass } from 'lucide-react';
+import { Users, BookOpen, Globe, Quote, Star, Target, Heart } from 'lucide-react';
 
 const Philosophy: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -51,13 +51,7 @@ const Philosophy: React.FC = () => {
 
   return (
     <>
-      {/* Enhanced Section Divider */}
-      <div className="section-divider">
-        <div className="section-divider-content">
-          <Compass className="section-divider-icon" />
-        </div>
-      </div>
-      
+      <div className="section-separator"></div>
       <section ref={sectionRef} className="section-padding bg-gradient-to-br from-off-white to-warm-light-orange/20">
         <div className="container mx-auto px-4">
           {/* Philosophy Header */}
@@ -95,9 +89,6 @@ const Philosophy: React.FC = () => {
             </div>
           </div>
 
-          {/* Geometric Separator */}
-          <div className="geometric-separator mb-20"></div>
-
           {/* Learning Journey Section */}
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 fade-in-section animate-delay-500">
@@ -116,8 +107,8 @@ const Philosophy: React.FC = () => {
                   className={`fade-in-section animate-delay-${(index + 6) * 100} relative`}
                 >
                   <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12 card-hover relative overflow-hidden">
-                    {/* Background Gradient */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${level.color} opacity-10 rounded-full -translate-y-1/2 translate-x-1/2`}></div>
+                    {/* Background Gradient using only FunLingua colors */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-orange/10 to-primary-purple/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                     
                     {/* Level Number */}
                     <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-primary-orange to-primary-purple rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-bounce-in">

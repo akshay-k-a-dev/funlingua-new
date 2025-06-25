@@ -170,107 +170,42 @@ html {
   animation-delay: 0.6s;
 }
 
-/* Enhanced section separators with gradient dividers */
-.section-divider {
+/* Simple section separator with only FunLingua colors */
+.section-separator {
   position: relative;
-  height: 120px;
-  overflow: hidden;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.section-divider::before {
+.section-separator::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, #F58220, #6A1B9A, #F58220, transparent);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
+  transform: translateY(-50%);
 }
 
-.section-divider::after {
+.section-separator::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #6A1B9A, #F58220, #6A1B9A, transparent);
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite reverse;
-}
-
-.section-divider-content {
-  position: relative;
-  z-index: 10;
-  background: linear-gradient(135deg, #F58220, #6A1B9A);
-  width: 80px;
-  height: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #F58220;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 32px rgba(245, 130, 32, 0.3);
-  animation: float 4s ease-in-out infinite;
-}
-
-.section-divider-icon {
-  color: white;
-  font-size: 24px;
-}
-
-/* Geometric section separators */
-.geometric-separator {
-  position: relative;
-  height: 100px;
-  overflow: hidden;
-  background: linear-gradient(45deg, transparent 30%, rgba(245, 130, 32, 0.05) 50%, transparent 70%);
-}
-
-.geometric-separator::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #F58220, #6A1B9A);
-  border-radius: 12px;
+  border: 3px solid #FAFAFA;
+  box-shadow: 0 0 0 2px #6A1B9A;
   animation: float 3s ease-in-out infinite;
-}
-
-.geometric-separator::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  animation: float 3s ease-in-out infinite reverse;
-  animation-delay: 0.5s;
-}
-
-/* Wave section separators */
-.wave-separator {
-  position: relative;
-  height: 80px;
-  overflow: hidden;
-}
-
-.wave-separator svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 /* Enhanced typography */

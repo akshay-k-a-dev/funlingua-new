@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Compass, Users, Clock, Camera, Heart, Home, Map, Play, Gamepad2 } from 'lucide-react';
+import { Compass, Users, Clock, Camera, Heart, Home, Map, Play } from 'lucide-react';
 import { ActivityProps } from '../types';
 
 const activities: ActivityProps[] = [
@@ -99,13 +99,7 @@ const LearningExperiences: React.FC = () => {
 
   return (
     <>
-      {/* Enhanced Section Divider */}
-      <div className="section-divider">
-        <div className="section-divider-content">
-          <Gamepad2 className="section-divider-icon" />
-        </div>
-      </div>
-      
+      <div className="section-separator"></div>
       <section ref={sectionRef} id="activities" className="section-padding bg-gradient-to-br from-soft-lilac to-warm-light-orange/20">
         <div className="container mx-auto px-4">
           {/* Header */}

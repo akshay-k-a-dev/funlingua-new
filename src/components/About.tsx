@@ -1,76 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 const About: React.FC = () => {
-  const [counters, setCounters] = useState({
-    years: 0,
-    students: 0,
-    trainers: 0,
-    communities: 0
-  });
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const numbersRef = useRef<HTMLDivElement>(null);
-
-  const targetValues = {
-    years: 5,
-    students: 1000,
-    trainers: 15,
-    communities: 30
-  };
-
-  const animateCounter = (
-    key: keyof typeof counters,
-    target: number,
-    duration: number = 2000
-  ) => {
-    const startTime = Date.now();
-    const startValue = 0;
-
-    const updateCounter = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
-
-      setCounters(prev => ({
-        ...prev,
-        [key]: currentValue
-      }));
-
-      if (progress < 1) {
-        requestAnimationFrame(updateCounter);
-      }
-    };
-
-    requestAnimationFrame(updateCounter);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true);
-            
-            // Start animations with slight delays for staggered effect
-            setTimeout(() => animateCounter('years', targetValues.years, 1500), 200);
-            setTimeout(() => animateCounter('students', targetValues.students, 2000), 400);
-            setTimeout(() => animateCounter('trainers', targetValues.trainers, 1800), 600);
-            setTimeout(() => animateCounter('communities', targetValues.communities, 1600), 800);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (numbersRef.current) {
-      observer.observe(numbersRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
   return (
     <section id="about" className="py-8 sm:py-12 lg:py-12 bg-warm-light-orange bg-opacity-30">
       <div className="container mx-auto px-4">
@@ -105,33 +35,25 @@ const About: React.FC = () => {
               </div>
               
               {/* Impact Statistics */}
-              <div className="mb-6 lg:mb-5" ref={numbersRef}>
+              <div className="mb-6 lg:mb-5">
                 <h3 className="text-lg lg:text-sm font-semibold text-primary-purple mb-4 lg:mb-3 text-center lg:text-left">
                   Our Impact in Numbers
                 </h3>
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-3 max-w-lg lg:max-w-md">
                   <div className="bg-white p-4 sm:p-5 lg:p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
-                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">
-                      {counters.years}+
-                    </div>
+                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">5+</div>
                     <div className="text-charcoal-gray text-sm sm:text-base lg:text-xs">Years Experience</div>
                   </div>
                   <div className="bg-white p-4 sm:p-5 lg:p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
-                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">
-                      {counters.students}+
-                    </div>
+                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">1000+</div>
                     <div className="text-charcoal-gray text-sm sm:text-base lg:text-xs">Students Taught</div>
                   </div>
                   <div className="bg-white p-4 sm:p-5 lg:p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
-                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">
-                      {counters.trainers}+
-                    </div>
+                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">15+</div>
                     <div className="text-charcoal-gray text-sm sm:text-base lg:text-xs">Expert Trainers</div>
                   </div>
                   <div className="bg-white p-4 sm:p-5 lg:p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
-                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">
-                      {counters.communities}+
-                    </div>
+                    <div className="text-2xl sm:text-3xl lg:text-xl font-bold text-primary-orange mb-2 lg:mb-1 group-hover:scale-110 transition-transform duration-300">30+</div>
                     <div className="text-charcoal-gray text-sm sm:text-base lg:text-xs">Communities Impacted</div>
                   </div>
                 </div>

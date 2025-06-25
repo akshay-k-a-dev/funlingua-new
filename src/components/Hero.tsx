@@ -5,7 +5,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative pt-20 pb-12 md:pt-24 md:pb-16 lg:pt-26 lg:pb-18 bg-gradient-to-br from-soft-lilac via-primary-purple/20 to-soft-lilac overflow-hidden min-h-screen lg:min-h-[80vh] flex items-center"
+      className="relative pt-20 pb-12 md:pt-24 md:pb-16 lg:pt-26 lg:pb-18 bg-gradient-to-br from-soft-lilac via-primary-purple/20 to-soft-lilac overflow-hidden min-h-screen lg:min-h-[83vh] flex items-center"
     >
       {/* Background Image */}
       <div 
@@ -16,8 +16,8 @@ const Hero: React.FC = () => {
       ></div>
       
       {/* Background circles */}
-      <div className="absolute top-1/4 right-1/4 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-62 lg:h-62 bg-primary-purple rounded-full opacity-15 blur-2xl"></div>
-      <div className="absolute bottom-1/4 left-1/3 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-78 lg:h-78 bg-primary-orange rounded-full opacity-10 blur-2xl"></div>
+      <div className="absolute top-1/4 right-1/4 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 bg-primary-purple rounded-full opacity-15 blur-2xl"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 bg-primary-orange rounded-full opacity-10 blur-2xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      <svg className="absolute bottom-0 left-0 right-0 w-full text-white h-12 sm:h-16 md:h-20 lg:h-14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120">
+      <svg className="absolute bottom-0 left-0 right-0 w-full text-white h-12 sm:h-16 md:h-20 lg:h-14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
         <path fill="currentColor" fillOpacity="1" d="M0,96L80,101.3C160,107,320,117,480,112C640,107,800,85,960,80C1120,75,1280,85,1360,90.7L1440,96L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
       </svg>
     </section>

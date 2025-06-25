@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Compass, Users, Clock, Camera, Heart, Home, Map } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Compass, Users, Clock, Camera, Heart, Home, Map, Play } from 'lucide-react';
 import { ActivityProps } from '../types';
 
 const activities: ActivityProps[] = [
@@ -42,81 +42,183 @@ const activities: ActivityProps[] = [
 
 const LearningExperiences: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll('.fade-in-section');
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-rotate activities
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % activities.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
   
-  const getIcon = (iconName: string) => {
+  const getIcon = (iconName: string, isActive = false) => {
+    const iconProps = {
+      size: 28,
+      className: `transition-all duration-300 ${isActive ? 'text-white' : 'text-primary-orange'}`
+    };
+
     switch (iconName) {
       case 'Compass':
-        return <Compass size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Compass {...iconProps} />;
       case 'Users':
-        return <Users size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Users {...iconProps} />;
       case 'Clock':
-        return <Clock size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Clock {...iconProps} />;
       case 'Camera':
-        return <Camera size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Camera {...iconProps} />;
       case 'Heart':
-        return <Heart size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Heart {...iconProps} />;
       case 'Home':
-        return <Home size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Home {...iconProps} />;
       case 'Map':
-        return <Map size={22} className="text-primary-orange lg:w-7 lg:h-7" />;
+        return <Map {...iconProps} />;
       default:
         return null;
     }
   };
 
   return (
-    <section id="activities" className="py-8 sm:py-12 lg:py-14 bg-soft-lilac">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 lg:mb-5 text-primary-purple px-2">
-            We Don't Just Teach. We Play.
-          </h2>
-          <p className="text-base sm:text-lg lg:text-lg text-charcoal-gray max-w-3xl mx-auto px-2 leading-relaxed">
-            Our unique activities make language learning an adventure, not a chore.
-          </p>
-        </div>
+    <>
+      <div className="section-separator"></div>
+      <section ref={sectionRef} id="activities" className="section-padding bg-gradient-to-br from-soft-lilac to-warm-light-orange/20">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-20 fade-in-section">
+            <h2 className="text-responsive-lg font-bold mb-8 text-gradient">
+              We Don't Just Teach. We Play.
+            </h2>
+            <p className="text-xl text-charcoal-gray max-w-3xl mx-auto leading-relaxed">
+              Our unique activities make language learning an adventure, not a chore.
+            </p>
+          </div>
         
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
-            {/* Activity Showcase */}
-            <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 lg:p-9 relative overflow-hidden h-48 sm:h-64 lg:h-72 flex items-center justify-center order-2 lg:order-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-warm-light-orange to-transparent opacity-20"></div>
-              <div className="relative z-10 text-center">
-                <div className="mb-4 sm:mb-6 lg:mb-7 flex justify-center">
-                  {getIcon(activities[activeIndex].icon)}
-                </div>
-                <h3 className="text-xl sm:text-2xl lg:text-2xl font-bold mb-3 sm:mb-4 lg:mb-5 text-primary-purple">
-                  {activities[activeIndex].title}
-                </h3>
-                <p className="text-charcoal-gray text-base lg:text-base leading-relaxed max-w-md mx-auto">
-                  {activities[activeIndex].description}
-                </p>
-              </div>
-            </div>
-            
-            {/* Activity List */}
-            <div className="grid gap-3 sm:gap-4 lg:gap-3 order-1 lg:order-2">
-              {activities.map((activity, index) => (
-                <button
-                  key={index}
-                  className={`text-left p-4 sm:p-5 lg:p-4 rounded-lg transition-all duration-300 flex items-center gap-4 lg:gap-4 w-full min-h-[60px] lg:min-h-[64px] group ${
-                    index === activeIndex
-                      ? 'bg-primary-purple text-white shadow-lg scale-105'
-                      : 'bg-white hover:bg-warm-light-orange hover:shadow-md'
-                  }`}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <div className={`flex-shrink-0 transition-transform duration-300 group-hover:scale-110 ${index === activeIndex ? 'text-white' : 'text-primary-orange'}`}>
-                    {getIcon(activity.icon)}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Activity Showcase */}
+              <div className="fade-in-section animate-delay-200 order-2 lg:order-1">
+                <div className="bg-white rounded-2xl shadow-2xl relative overflow-hidden h-96 flex items-center justify-center group">
+                  {/* Background Animation */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-orange/10 via-primary-purple/10 to-transparent animate-pulse"></div>
+                  
+                  {/* Floating Elements */}
+                  <div className="absolute top-4 right-4 w-8 h-8 bg-primary-orange/20 rounded-full animate-float"></div>
+                  <div className="absolute bottom-6 left-6 w-6 h-6 bg-primary-purple/20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+                  
+                  <div className="relative z-10 text-center p-8">
+                    {/* Icon with Animation */}
+                    <div className="mb-8 flex justify-center">
+                      <div className="w-24 h-24 bg-gradient-to-br from-primary-orange to-primary-purple rounded-full flex items-center justify-center animate-bounce-in shadow-lg">
+                        {getIcon(activities[activeIndex].icon)}
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <h3 className="text-3xl font-bold mb-6 text-primary-purple animate-fade-in-up">
+                      {activities[activeIndex].title}
+                    </h3>
+                    <p className="text-charcoal-gray text-lg leading-relaxed max-w-md mx-auto animate-fade-in-up animate-delay-200">
+                      {activities[activeIndex].description}
+                    </p>
+                    
+                    {/* Play Button */}
+                    <button className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-primary-orange to-primary-purple text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                      <Play size={20} />
+                      Try This Activity
+                    </button>
                   </div>
-                  <span className="font-medium text-base sm:text-lg lg:text-base">{activity.title}</span>
-                </button>
-              ))}
+                </div>
+              </div>
+            
+              {/* Activity List */}
+              <div className="fade-in-section animate-delay-400 order-1 lg:order-2">
+                <div className="space-y-4">
+                  {activities.map((activity, index) => (
+                    <button
+                      key={index}
+                      className={`w-full text-left p-6 rounded-2xl transition-all duration-500 flex items-center gap-6 group ${
+                        index === activeIndex
+                          ? 'bg-gradient-to-r from-primary-purple to-primary-orange text-white shadow-2xl scale-105 animate-pulse-glow'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-warm-light-orange hover:to-soft-lilac hover:shadow-xl card-hover'
+                      }`}
+                      onClick={() => setActiveIndex(index)}
+                    >
+                      {/* Icon */}
+                      <div className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        index === activeIndex 
+                          ? 'bg-white/20 shadow-lg' 
+                          : 'bg-gradient-to-br from-warm-light-orange to-primary-orange/20 group-hover:scale-110'
+                      }`}>
+                        {getIcon(activity.icon, index === activeIndex)}
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h4 className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                          index === activeIndex ? 'text-white' : 'text-primary-purple'
+                        }`}>
+                          {activity.title}
+                        </h4>
+                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                          index === activeIndex ? 'text-white/90' : 'text-charcoal-gray'
+                        }`}>
+                          {activity.description}
+                        </p>
+                      </div>
+                      
+                      {/* Progress Indicator */}
+                      {index === activeIndex && (
+                        <div className="flex-shrink-0">
+                          <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                
+                {/* Activity Counter */}
+                <div className="mt-8 text-center">
+                  <div className="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-lg">
+                    <span className="text-primary-purple font-semibold">
+                      {activeIndex + 1} of {activities.length}
+                    </span>
+                    <div className="flex gap-1">
+                      {activities.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === activeIndex ? 'bg-primary-orange' : 'bg-gray-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

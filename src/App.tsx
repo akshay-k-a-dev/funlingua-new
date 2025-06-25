@@ -36,22 +36,46 @@ const HomePage: React.FC = () => {
         }
       });
     });
+
+    // Initialize intersection observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in sections
+    const fadeElements = document.querySelectorAll('.fade-in-section');
+    fadeElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-off-white">
+    <div className="min-h-screen bg-off-white overflow-x-hidden">
       <Navbar />
-      <Hero />
-      <ProblemStatement />
-      <Philosophy />
-      <Approach />
-      <LearningExperiences />
-      <SocialImpact />
-      <About />
-      <Team />
-      <SuccessStories />
-      <Vision />
-      <ContactForm />
+      <main className="space-y-section">
+        <Hero />
+        <ProblemStatement />
+        <Philosophy />
+        <Approach />
+        <LearningExperiences />
+        <SocialImpact />
+        <About />
+        <Team />
+        <SuccessStories />
+        <Vision />
+        <ContactForm />
+      </main>
       <Footer />
     </div>
   );

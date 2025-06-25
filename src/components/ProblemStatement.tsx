@@ -1,43 +1,89 @@
-import React from 'react';
-import { AlertCircle } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { AlertCircle, ArrowRight } from 'lucide-react';
 
 const ProblemStatement: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll('.fade-in-section');
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const problems = [
+    "Thinking in Malayalam… pause… and searching for English words.",
+    "Having the thoughts, but not the right words.",
+    "Staying silent due to fear of being wrong."
+  ];
+
   return (
-    <section className="py-8 sm:py-12 lg:py-14 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-2xl lg:max-w-2xl mx-auto">
-          <div className="bg-soft-lilac rounded-xl p-6 sm:p-8 lg:p-9 shadow-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 lg:w-45 lg:h-45 bg-primary-purple opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            
-            <AlertCircle 
-              className="text-primary-purple mb-4 sm:mb-6 lg:mb-7"
-              size={30}
-            />
-            
-            <div className="space-y-4 sm:space-y-6 lg:space-y-7 mb-6 sm:mb-8 lg:mb-9">
-              <div className="flex items-start gap-3 lg:gap-3">
-                <span className="flex-shrink-0 w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-primary-orange flex items-center justify-center text-white font-bold text-sm lg:text-sm">1</span>
-                <p className="text-base sm:text-lg lg:text-lg text-charcoal-gray leading-relaxed">Thinking in Malayalam… pause… and searching for English words.</p>
+    <>
+      <div className="section-separator"></div>
+      <section ref={sectionRef} className="section-padding bg-gradient-to-br from-white to-soft-lilac/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-16 fade-in-section">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-orange to-primary-purple rounded-full mb-8 animate-bounce-in">
+                <AlertCircle className="text-white" size={32} />
               </div>
-              
-              <div className="flex items-start gap-3 lg:gap-3">
-                <span className="flex-shrink-0 w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-primary-orange flex items-center justify-center text-white font-bold text-sm lg:text-sm">2</span>
-                <p className="text-base sm:text-lg lg:text-lg text-charcoal-gray leading-relaxed">Having the thoughts, but not the right words.</p>
-              </div>
-              
-              <div className="flex items-start gap-3 lg:gap-3">
-                <span className="flex-shrink-0 w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-primary-orange flex items-center justify-center text-white font-bold text-sm lg:text-sm">3</span>
-                <p className="text-base sm:text-lg lg:text-lg text-charcoal-gray leading-relaxed">Staying silent due to fear of being wrong.</p>
-              </div>
+              <h2 className="text-responsive-lg font-bold mb-6 text-gradient">
+                Sound Familiar?
+              </h2>
+              <p className="text-xl text-charcoal-gray leading-relaxed">
+                You're not alone in this struggle. Millions face these exact challenges every day.
+              </p>
+            </div>
+
+            {/* Problem Cards */}
+            <div className="space-y-8 mb-16">
+              {problems.map((problem, index) => (
+                <div 
+                  key={index}
+                  className={`fade-in-section animate-delay-${(index + 2) * 100} glass-effect rounded-2xl p-8 shadow-xl card-hover`}
+                >
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary-orange to-primary-purple flex items-center justify-center text-white font-bold text-xl animate-scale-in">
+                      {index + 1}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xl text-charcoal-gray leading-relaxed">
+                        {problem}
+                      </p>
+                    </div>
+                    <ArrowRight className="text-primary-orange opacity-50 animate-float" size={24} />
+                  </div>
+                </div>
+              ))}
             </div>
             
-            <p className="text-lg sm:text-xl lg:text-xl font-semibold text-primary-purple text-center leading-relaxed">
-              FunLingua is built for people like you.
-            </p>
+            {/* Solution Statement */}
+            <div className="fade-in-section animate-delay-500">
+              <div className="bg-gradient-to-r from-primary-purple to-primary-orange rounded-2xl p-8 text-center shadow-2xl transform hover:scale-105 transition-all duration-300">
+                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 text-shadow">
+                  FunLingua is built for people like you.
+                </h3>
+                <p className="text-lg text-white/90 leading-relaxed">
+                  We understand your journey because we've been there too.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

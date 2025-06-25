@@ -103,6 +103,15 @@ html {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* Animation classes */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
@@ -132,6 +141,10 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
 /* Staggered animation delays */
 .animate-delay-100 {
   animation-delay: 0.1s;
@@ -157,36 +170,107 @@ html {
   animation-delay: 0.6s;
 }
 
-/* Section separators */
-.section-separator {
+/* Enhanced section separators with gradient dividers */
+.section-divider {
   position: relative;
-  margin: 4rem 0;
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.section-separator::before {
+.section-divider::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, #F58220, #6A1B9A);
-  border-radius: 2px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F58220, #6A1B9A, #F58220, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
 }
 
-.section-separator::after {
+.section-divider::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  background: #F58220;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6A1B9A, #F58220, #6A1B9A, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite reverse;
+}
+
+.section-divider-content {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, #F58220, #6A1B9A);
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 3px solid white;
-  box-shadow: 0 0 0 2px #6A1B9A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(245, 130, 32, 0.3);
+  animation: float 4s ease-in-out infinite;
+}
+
+.section-divider-icon {
+  color: white;
+  font-size: 24px;
+}
+
+/* Geometric section separators */
+.geometric-separator {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  background: linear-gradient(45deg, transparent 30%, rgba(245, 130, 32, 0.05) 50%, transparent 70%);
+}
+
+.geometric-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #F58220, #6A1B9A);
+  border-radius: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.geometric-separator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  animation: float 3s ease-in-out infinite reverse;
+  animation-delay: 0.5s;
+}
+
+/* Wave section separators */
+.wave-separator {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+}
+
+.wave-separator svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Enhanced typography */

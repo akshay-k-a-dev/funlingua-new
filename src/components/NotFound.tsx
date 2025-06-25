@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft, Globe } from 'lucide-react';
 
 const NotFound: React.FC = () => {
   const handleReturnHome = () => {
@@ -7,78 +7,71 @@ const NotFound: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#E6E6FA' }}>
-      <div className="text-center max-w-2xl mx-auto">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-soft-lilac via-primary-purple/10 to-warm-light-orange/20 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute top-1/4 right-1/4 w-32 h-32 md:w-48 md:h-48 bg-primary-purple rounded-full opacity-10 blur-2xl animate-float"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-40 h-40 md:w-56 md:h-56 bg-primary-orange rounded-full opacity-10 blur-2xl animate-float" style={{ animationDelay: '1s' }}></div>
+      
+      {/* Floating Particles */}
+      <div className="absolute top-20 left-10 w-4 h-4 bg-primary-orange rounded-full opacity-30 animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute top-40 right-20 w-3 h-3 bg-primary-purple rounded-full opacity-40 animate-bounce" style={{ animationDelay: '1.5s' }}></div>
+      <div className="absolute bottom-40 left-20 w-5 h-5 bg-primary-orange rounded-full opacity-25 animate-bounce" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute bottom-32 right-10 w-4 h-4 bg-primary-purple rounded-full opacity-35 animate-bounce" style={{ animationDelay: '2.5s' }}></div>
+
+      <div className="text-center max-w-2xl mx-auto relative z-10">
+        {/* Logo */}
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <Globe size={48} className="text-primary-orange animate-bounce-in" />
+          <span className="text-3xl font-bold">
+            <span className="text-primary-orange">Fun</span>
+            <span className="text-primary-purple">Lingua</span>
+          </span>
+        </div>
+
         {/* Animated 404 */}
         <div className="mb-8 md:mb-12">
-          <h1 
-            className="text-8xl sm:text-9xl md:text-[12rem] font-bold leading-none animate-pulse"
-            style={{ color: '#FFA500' }}
-          >
+          <h1 className="text-8xl sm:text-9xl md:text-[12rem] font-bold leading-none text-gradient animate-pulse-glow">
             404
           </h1>
         </div>
 
         {/* Error Message */}
         <div className="mb-8 md:mb-12 space-y-4 md:space-y-6">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6"
-            style={{ color: '#FFA500' }}
-          >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-primary-orange animate-fade-in-up">
             Oops! Page Not Found
           </h2>
-          <p 
-            className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed"
-            style={{ color: '#8B5A96' }}
-          >
-            The page you're looking for seems to have wandered off
+          <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-primary-purple animate-fade-in-up animate-delay-200">
+            The page you're looking for seems to have wandered off on a language adventure!
+          </p>
+          <p className="text-base sm:text-lg text-charcoal-gray animate-fade-in-up animate-delay-300">
+            Don't worry, let's get you back to learning English the fun way.
           </p>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="mb-8 md:mb-12 flex justify-center">
-          <div className="relative">
-            <div 
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full opacity-20 animate-bounce"
-              style={{ backgroundColor: '#FFA500' }}
-            ></div>
-            <div 
-              className="absolute top-2 left-2 w-20 h-20 md:w-28 md:h-28 rounded-full opacity-30"
-              style={{ backgroundColor: '#8B5A96' }}
-            ></div>
+        {/* Decorative Quote */}
+        <div className="mb-8 md:mb-12 animate-fade-in-up animate-delay-400">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-orange/20">
+            <p className="text-primary-purple italic text-lg font-medium">
+              "Even when lost, every step is a learning opportunity!"
+            </p>
           </div>
         </div>
 
-        {/* Return Home Button */}
-        <div className="space-y-4">
+        {/* Action Buttons */}
+        <div className="space-y-4 animate-fade-in-up animate-delay-500">
           <button
             onClick={handleReturnHome}
-            className="group inline-flex items-center gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-semibold text-lg md:text-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-300"
-            style={{ 
-              backgroundColor: '#FFA500', 
-              color: '#E6E6FA'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#E6E6FA';
-              e.currentTarget.style.color = '#FFA500';
-              e.currentTarget.style.border = '2px solid #FFA500';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#FFA500';
-              e.currentTarget.style.color = '#E6E6FA';
-              e.currentTarget.style.border = 'none';
-            }}
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-primary-orange to-primary-purple text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-semibold text-lg md:text-xl transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-300 card-hover"
           >
             <Home size={24} className="transition-transform duration-300 group-hover:scale-110" />
-            Return Home
+            Return to FunLingua Home
           </button>
 
           {/* Alternative Link */}
           <div className="mt-6">
             <button
               onClick={() => window.history.back()}
-              className="inline-flex items-center gap-2 text-lg font-medium transition-all duration-300 hover:scale-105"
-              style={{ color: '#8B5A96' }}
+              className="inline-flex items-center gap-2 text-lg font-medium text-primary-purple hover:text-primary-orange transition-all duration-300 hover:scale-105"
             >
               <ArrowLeft size={20} />
               Go Back
@@ -86,11 +79,14 @@ const NotFound: React.FC = () => {
           </div>
         </div>
 
-        {/* Additional Decorative Elements */}
-        <div className="absolute top-10 left-10 w-16 h-16 rounded-full opacity-10 animate-pulse" style={{ backgroundColor: '#FFA500' }}></div>
-        <div className="absolute top-20 right-16 w-12 h-12 rounded-full opacity-15 animate-bounce" style={{ backgroundColor: '#8B5A96' }}></div>
-        <div className="absolute bottom-16 left-20 w-20 h-20 rounded-full opacity-10 animate-pulse" style={{ backgroundColor: '#FFA500' }}></div>
-        <div className="absolute bottom-32 right-10 w-14 h-14 rounded-full opacity-15 animate-bounce" style={{ backgroundColor: '#8B5A96' }}></div>
+        {/* Fun Learning Tip */}
+        <div className="mt-12 animate-fade-in-up animate-delay-600">
+          <div className="bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-xl p-4 border border-primary-purple/20">
+            <p className="text-sm text-charcoal-gray">
+              <strong className="text-primary-purple">Fun Fact:</strong> Getting lost is just another way to discover new paths - just like learning English!
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { AlertCircle, ArrowRight } from 'lucide-react';
+import { AlertCircle, ArrowRight, Lightbulb } from 'lucide-react';
 
 const ProblemStatement: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,7 +30,13 @@ const ProblemStatement: React.FC = () => {
 
   return (
     <>
-      <div className="section-separator"></div>
+      {/* Enhanced Section Divider */}
+      <div className="section-divider">
+        <div className="section-divider-content">
+          <Lightbulb className="section-divider-icon" />
+        </div>
+      </div>
+      
       <section ref={sectionRef} className="section-padding bg-gradient-to-br from-white to-soft-lilac/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">

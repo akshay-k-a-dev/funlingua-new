@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Users, BookOpen, Globe, Quote, Star, Target, Heart } from 'lucide-react';
+import { Users, BookOpen, Globe, Quote, Star, Target, Heart, Compass } from 'lucide-react';
 
 const Philosophy: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -51,7 +51,13 @@ const Philosophy: React.FC = () => {
 
   return (
     <>
-      <div className="section-separator"></div>
+      {/* Enhanced Section Divider */}
+      <div className="section-divider">
+        <div className="section-divider-content">
+          <Compass className="section-divider-icon" />
+        </div>
+      </div>
+      
       <section ref={sectionRef} className="section-padding bg-gradient-to-br from-off-white to-warm-light-orange/20">
         <div className="container mx-auto px-4">
           {/* Philosophy Header */}
@@ -88,6 +94,9 @@ const Philosophy: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* Geometric Separator */}
+          <div className="geometric-separator mb-20"></div>
 
           {/* Learning Journey Section */}
           <div className="max-w-6xl mx-auto">

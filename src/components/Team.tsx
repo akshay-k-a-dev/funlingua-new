@@ -1,7 +1,7 @@
 import React from 'react';
 import { User, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
 import bijuSimonImage from '../assets/BijuSimon.JPG';
-
+import dittoImage from '../assets/ImmanuelDitto.jpg';
 const Team: React.FC = () => {
   return (
     <section id="team" className="py-16 md:py-18 lg:py-17 bg-soft-lilac">

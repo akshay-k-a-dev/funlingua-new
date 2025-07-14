@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
-import bijuSimonImage from '../assets/Biju Simon.jpg';
+import bijuSimonImage from '../assets/BijuSimon.JPG';
 
 const Team: React.FC = () => {
   return (

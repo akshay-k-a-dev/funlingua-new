@@ -1,7 +1,8 @@
 import React from 'react';
 import { User, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
-import bijuSimonImage from '../assets/BijuSimon.JPG';
-import dittoImage from '../assets/ImmanuelDitto.jpg';
+import bijuSimonImage from '../assets/BijuSimon.jpg';
+import dittoImage from '../assets/ImmanuelDitto.jpg'; // ✅ Make sure the file exists
+
 const Team: React.FC = () => {
   return (
     <section id="team" className="py-16 md:py-18 lg:py-17 bg-soft-lilac">
@@ -40,8 +41,13 @@ const Team: React.FC = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 lg:p-7 text-center">
-              <div className="w-20 h-20 md:w-24 md:h-24 lg:w-22 lg:h-22 bg-primary-orange rounded-full flex items-center justify-center mx-auto mb-4">
-                <User className="text-white" size={30} />
+              <div className="w-20 h-20 md:w-24 md:h-24 lg:w-22 lg:h-22 mx-auto mb-4 overflow-hidden rounded-full border-4 border-primary-orange shadow-lg">
+                <img 
+                  src={dittoImage} 
+                  alt="Immanuel Ditto Lopez - CFO" 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <h4 className="text-lg md:text-xl lg:text-lg font-bold text-primary-purple mb-2">
                 Immanuel Ditto Lopez

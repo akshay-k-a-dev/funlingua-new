@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Play, ArrowDown, MousePointer } from 'lucide-react';
-import hero1 from '../assets/hero1.jpg';
-import hero2 from '../assets/hero2.jpg';
-import hero3 from '../assets/hero3.jpg';
+import hero1 from '../assets/Hero1.JPG';
+import hero2 from '../assets/Hero2.JPG';
+import hero3 from '../assets/Hero3.JPG';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);

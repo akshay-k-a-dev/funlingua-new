@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { Play, ArrowDown } from 'lucide-react';
+import { Play, ArrowDown, MousePointer } from 'lucide-react';
+import hero1 from '../assets/hero1.jpg';
+import hero2 from '../assets/hero2.jpg';
+import hero3 from '../assets/hero3.jpg';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const heroImages = [hero1, hero2, hero3];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,20 +27,51 @@ const Hero: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Auto-rotate hero images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
   return (
     <section
       ref={heroRef}
       id="home"
-      className="relative pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24 bg-gradient-to-br from-soft-lilac via-primary-purple/20 to-soft-lilac overflow-hidden min-h-screen flex items-center"
+      className="relative pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24 overflow-hidden min-h-screen flex items-center"
     >
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 md:opacity-20"
-        style={{
-          backgroundImage: 'url(https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1)'
-        }}
-      ></div>
+      {/* Hero Image Slider */}
+      <div className="absolute inset-0">
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={image}
+              alt={`Hero slide ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-soft-lilac/80 via-primary-purple/40 to-soft-lilac/80"></div>
+          </div>
+        ))}
+      </div>
       
+      {/* Floating Cursor Icon */}
+      <div className="absolute top-1/4 right-1/4 z-20 animate-float">
+        <div className="relative">
+          <MousePointer 
+            size={48} 
+            className="text-primary-orange drop-shadow-lg animate-pulse cursor-pointer hover:scale-110 transition-transform duration-300" 
+          />
+          <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary-purple rounded-full animate-ping"></div>
+        </div>
+      </div>
+
       {/* Animated Background Elements */}
       <div className="absolute top-1/4 right-1/4 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 bg-primary-purple rounded-full opacity-15 blur-2xl animate-float"></div>
       <div className="absolute bottom-1/4 left-1/3 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 bg-primary-orange rounded-full opacity-10 blur-2xl animate-float" style={{ animationDelay: '1s' }}></div>
@@ -87,6 +123,24 @@ const Hero: React.FC = () => {
             <div className="flex flex-col items-center mt-16">
               <p className="text-sm text-charcoal-gray mb-4 opacity-70">Discover Our Story</p>
               <ArrowDown className="text-primary-orange animate-bounce" size={24} />
+            </div>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="fade-in-section animate-delay-700">
+            <div className="flex justify-center gap-2 mt-8">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'bg-primary-orange scale-125' 
+                      : 'bg-white/50 hover:bg-white/70'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>

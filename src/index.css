@@ -132,6 +132,23 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Enhanced cursor animation */
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
+}
+
 /* Staggered animation delays */
 .animate-delay-100 {
   animation-delay: 0.1s;

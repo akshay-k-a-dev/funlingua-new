@@ -1,5 +1,6 @@
 import React from 'react';
 import { Globe, Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
+import logoImage from '../assets/logo.jpg';
 
 const Footer: React.FC = () => {
   return (
@@ -8,11 +9,11 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-4 gap-8 lg:gap-7">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <Globe size={30} className="text-primary-orange lg:w-7 lg:h-7" />
-              <span className="text-2xl lg:text-xl font-bold">
-                <span className="text-primary-orange">Fun</span>
-                <span className="text-white">Lingua</span>
-              </span>
+              <img 
+                src={logoImage} 
+                alt="FunLingua Logo" 
+                className="h-8 lg:h-7 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-white opacity-80 mb-6 lg:mb-5 text-base lg:text-sm">
               Where language fear ends and confidence begins.

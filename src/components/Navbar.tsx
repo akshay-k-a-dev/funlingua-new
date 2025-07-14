@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { NavLinkProps } from '../types';
+import logoImage from '../assets/logo.jpg';
 
 const navLinks: NavLinkProps[] = [
   { href: '#home', label: 'Home' },
@@ -44,11 +45,11 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 md:gap-2 z-50 relative">
-            <Globe size={32} className="text-primary-orange md:w-7 md:h-7" />
-            <span className="text-xl md:text-lg font-bold">
-              <span className="text-primary-orange">Fun</span>
-              <span className="text-primary-purple">Lingua</span>
-            </span>
+            <img 
+              src={logoImage} 
+              alt="FunLingua Logo" 
+              className="h-10 md:h-8 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop Menu */}

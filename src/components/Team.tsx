@@ -1,5 +1,6 @@
 import React from 'react';
 import { User, ExternalLink, Linkedin, BookOpen } from 'lucide-react';
+import bijuSimonImage from '../assets/Biju Simon.jpg';
 
 const Team: React.FC = () => {
   return (
@@ -21,8 +22,13 @@ const Team: React.FC = () => {
           </h3>
           <div className="grid sm:grid-cols-2 gap-6 md:gap-8 lg:gap-7">
             <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 lg:p-7 text-center">
-              <div className="w-20 h-20 md:w-24 md:h-24 lg:w-22 lg:h-22 bg-primary-orange rounded-full flex items-center justify-center mx-auto mb-4">
-                <User className="text-white" size={30} />
+              <div className="w-20 h-20 md:w-24 md:h-24 lg:w-22 lg:h-22 mx-auto mb-4 overflow-hidden rounded-full border-4 border-primary-orange shadow-lg">
+                <img 
+                  src={bijuSimonImage} 
+                  alt="Biju Simon - Founder & CEO" 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <h4 className="text-lg md:text-xl lg:text-lg font-bold text-primary-purple mb-2">
                 Biju Simon

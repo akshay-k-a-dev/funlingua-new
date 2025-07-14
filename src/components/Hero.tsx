@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Play, ArrowDown, MousePointer } from 'lucide-react';
-import hero1 from '../assets/Hero1.JPG';
-import hero2 from '../assets/Hero2.JPG';
+import hero1 from '../assets/Hero1.jpg';
+import hero2 from '../assets/Hero2.jpg';
 import hero3 from '../assets/Hero3.jpg';
 
 const Hero: React.FC = () => {
